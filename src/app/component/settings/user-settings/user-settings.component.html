@@ -1,0 +1,44 @@
+<form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="user-card">
+    <mat-card-header>
+      <mat-card-title>User Settings</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Old Password" formControlName="oldPass">
+            @if (userForm.controls['oldPass'].hasError('required')) {
+              <mat-error>Old password is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="New Password" formControlName="newPass">
+            @if (userForm.controls['newPass'].hasError('required')) {
+              <mat-error>New password is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="password" placeholder="Confirm Password" formControlName="passwordConfirm">
+            @if (userForm.controls['passwordConfirm'].hasError('required')) {
+              <mat-error>Confirming the password is <strong>required</strong></mat-error>
+            } @else if (userForm.controls['passwordConfirm'].hasError('notEqual')) {
+              <mat-error>Passwords do not match.</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

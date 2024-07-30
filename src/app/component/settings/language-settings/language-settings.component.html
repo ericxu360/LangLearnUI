@@ -1,0 +1,50 @@
+<form [formGroup]="langSettingsForm" (ngSubmit)="onSubmit()">
+  <mat-card class="language-card">
+    <mat-card-header>
+      <mat-card-title>Language Settings</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Name" formControlName="name">
+            @if (langSettingsForm.controls['name'].hasError('required')) {
+              <mat-error>Native language is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Native Language" formControlName="nativeLang" (selectionChange)="selectChange($event)">
+              @for (lang of (nativeLangOptions$ | async)?.content; track lang) {
+                <mat-option [value]="lang.modelLocalesCode">{{ lang.modelLocalesCode }}</mat-option>
+              }
+            </mat-select>
+            @if (langSettingsForm.controls['nativeLang'].hasError('required')) {
+              <mat-error>Native language is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="New Language" formControlName="newLang">
+              @for (lang of (newLangOptions$ | async)?.content; track lang) {
+                <mat-option [value]="lang.modelLocalesCode">{{ lang.modelLocalesCode }}</mat-option>
+              }
+            </mat-select>
+            @if (langSettingsForm.controls['newLang'].hasError('required')) {
+              <mat-error>New language is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,16 @@
+.chatbox {
+  background: #d7dbe3;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.chatbox-filler {
+  flex-grow: 1;
+}
+
+.example-full-width {
+  width: 100%;
+}
